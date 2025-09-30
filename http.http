@@ -1,0 +1,163 @@
+### Змінні
+@host = http://localhost:8080
+@api = {{host}}/api/products
+
+### ==================== CREATE (POST) ====================
+
+### Створити продукт 1 - Ноутбук
+POST {{api}}
+Content-Type: application/json
+
+{
+  "name": "Ноутбук",
+  "description": "Lenovo ThinkPad X1 Carbon Gen 11",
+  "price": 35000.00,
+  "quantity": 10
+}
+
+### Створити продукт 2 - Миша
+POST {{api}}
+Content-Type: application/json
+
+{
+  "name": "Миша",
+  "description": "Logitech MX Master 3S",
+  "price": 2800.00,
+  "quantity": 50
+}
+
+### Створити продукт 3 - Клавіатура
+POST {{api}}
+Content-Type: application/json
+
+{
+  "name": "Клавіатура",
+  "description": "Keychron K8 Pro QMK",
+  "price": 3500.00,
+  "quantity": 30
+}
+
+### Створити продукт 4 - Монітор
+POST {{api}}
+Content-Type: application/json
+
+{
+  "name": "Монітор",
+  "description": "Dell UltraSharp 27 4K U2723DE",
+  "price": 18000.00,
+  "quantity": 15
+}
+
+### Створити продукт 5 - Навушники
+POST {{api}}
+Content-Type: application/json
+
+{
+  "name": "Навушники",
+  "description": "Sony WH-1000XM5",
+  "price": 9500.00,
+  "quantity": 25
+}
+
+### ==================== READ (GET) ====================
+
+### Отримати всі продукти
+GET {{api}}
+
+### Отримати продукт з ID=1
+GET {{api}}/1
+
+### Отримати продукт з ID=2
+GET {{api}}/2
+
+### Отримати продукт з ID=3
+GET {{api}}/3
+
+### Отримати неіснуючий продукт (має повернути 404)
+GET {{api}}/999
+
+### ==================== UPDATE (PUT) ====================
+
+### Оновити продукт 1 - змінити ціну та кількість
+PUT {{api}}/1
+Content-Type: application/json
+
+{
+  "name": "Ноутбук",
+  "description": "Lenovo ThinkPad X1 Carbon Gen 11 - Оновлений",
+  "price": 32000.00,
+  "quantity": 8
+}
+
+### Оновити продукт 2 - змінити опис
+PUT {{api}}/2
+Content-Type: application/json
+
+{
+  "name": "Миша",
+  "description": "Logitech MX Master 3S - Бездротова",
+  "price": 2800.00,
+  "quantity": 45
+}
+
+### Спроба оновити неіснуючий продукт (має повернути 404)
+PUT {{api}}/999
+Content-Type: application/json
+
+{
+  "name": "Тест",
+  "description": "Неіснуючий продукт",
+  "price": 100.00,
+  "quantity": 1
+}
+
+### ==================== DELETE ====================
+
+### Видалити продукт з ID=1
+DELETE {{api}}/1
+
+### Видалити продукт з ID=2
+DELETE {{api}}/2
+
+### Спроба видалити неіснуючий продукт
+DELETE {{api}}/999
+
+### ==================== ТЕСТОВІ СЦЕНАРІЇ ====================
+
+### Створити продукт з мінімальними даними
+POST {{api}}
+Content-Type: application/json
+
+{
+  "name": "Тестовий продукт",
+  "description": null,
+  "price": 100.00,
+  "quantity": 1
+}
+
+### Створити продукт з дуже великою ціною
+POST {{api}}
+Content-Type: application/json
+
+{
+  "name": "Дорогий продукт",
+  "description": "Сервер для дата-центру",
+  "price": 999999.99,
+  "quantity": 1
+}
+
+### Створити продукт з нульовою кількістю
+POST {{api}}
+Content-Type: application/json
+
+{
+  "name": "Розпроданий товар",
+  "description": "Товар закінчився",
+  "price": 1500.00,
+  "quantity": 0
+}
+
+### Перевірити всі продукти після всіх операцій
+GET {{api}}
+
+###
